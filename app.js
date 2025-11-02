@@ -101,5 +101,22 @@ nameInput.addEventListener("input", function () {
     }
 });
 
+nameInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        addName();
+    }
+})
+
+nameList.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.matches("input")) {
+        const li = e.target.closest("li");
+        const btn = li.querySelector(".edit-btn");
+        if (btn.textContent === "Save") {
+            btn.click();
+            e.preventDefault();
+        }
+    }
+})
+
 // ======== Loads the saved names when page loads ========
 loadNames();
