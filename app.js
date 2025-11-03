@@ -50,6 +50,7 @@ function nameOptions(e) {
         const nameSpan = li.querySelector(".name-text");
         const editInput = document.createElement("input");
         editInput.value = nameSpan.textContent;
+        editInput.dataset.original = nameSpan.textContent; 
         nameSpan.replaceWith(editInput);
         e.target.textContent = "Save";
         editInput.focus();
@@ -115,6 +116,15 @@ nameList.addEventListener("keydown", function (e) {
             btn.click();
             e.preventDefault();
         }
+    }
+    if (e.key === "Escape" && e.target.matches("input")) {
+        const li = e.target.closest("li");
+        const nameSpan = document.createElement("span");
+        nameSpan.classList.add("name-text");
+        nameSpan.textContent = e.target.dataset.original;
+        e.target.replaceWith(nameSpan);
+        li.querySelector(".edit-btn").textContent = "Edit";
+
     }
 })
 
